@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تدرجات الألوان</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cairo:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+        }
+        /* كلاسات مخصصة لتباين النص */
+        .text-light { color: #ffffff; }
+        .text-dark { color: #111827; }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">قالب تدرجات الألوان</h1>
+
+        <!-- مصفوفة الألوان والتسميات -->
+        <script>
+            window.roles = [
+                "test support",
+                "support mod",
+                "support gaurdian",
+                "support team",
+                "support martial",
+                "support elite",
+                "support myth",
+                "support manger"
+            ];
+
+            window.palettes = [
+                {
+                    name: "بني رمادي (Taupe)",
+                    colorClass: "text-stone-600",
+                    shades: [
+                        { hex: "#f5f5f4", text: "dark" },
+                        { hex: "#e7e5e4", text: "dark" },
+                        { hex: "#d6d3d1", text: "dark" },
+                        { hex: "#b0a9a4", text: "dark" },
+                        { hex: "#8e867f", text: "light" },
+                        { hex: "#78716c", text: "light" },
+                        { hex: "#5d5753", text: "light" },
+                        { hex: "#4a4541", text: "light" }
+                    ]
+                },
+                {
+                    name: "أزرق داكن (Navy Blue)",
+                    colorClass: "text-blue-900",
+                    shades: [
+                        { hex: "#e6e9f0", text: "dark" },
+                        { hex: "#ccd3e0", text: "dark" },
+                        { hex: "#aeb8c9", text: "dark" },
+                        { hex: "#909db2", text: "dark" },
+                        { hex: "#73839c", text: "light" },
+                        { hex: "#566986", text: "light" },
+                        { hex: "#394f70", text: "light" },
+                        { hex: "#001f5c", text: "light" }
+                    ]
+                },
+                {
+                    name: "رمادي داكن (Slate)",
+                    colorClass: "text-slate-900",
+                    shades: [
+                        { hex: "#f8fafc", text: "dark" },
+                        { hex: "#f1f5f9", text: "dark" },
+                        { hex: "#e2e8f0", text: "dark" },
+                        { hex: "#cbd5e1", text: "dark" },
+                        { hex: "#94a3b8", text: "dark" },
+                        { hex: "#64748b", text: "light" },
+                        { hex: "#334155", text: "light" },
+                        { hex: "#1e293b", text: "light" }
+                    ]
+                },
+                {
+                    name: "فضي (Silver)",
+                    colorClass: "text-slate-900",
+                    shades: [
+                        { hex: "#f8fafc", text: "dark" },
+                        { hex: "#f1f5f9", text: "dark" },
+                        { hex: "#e2e8f0", text: "dark" },
+                        { hex: "#cbd5e1", text: "dark" },
+                        { hex: "#94a3b8", text: "dark" },
+                        { hex: "#64748b", text: "light" },
+                        { hex: "#334155", text: "light" },
+                        { hex: "#0f172a", text: "light" }
+                    ]
+                },
+                {
+                    name: "كستنائي (Maroon)",
+                    colorClass: "text-red-900",
+                    shades: [
+                        { hex: "#ffcdd2", text: "dark" },
+                        { hex: "#e57373", text: "light" },
+                        { hex: "#d32f2f", text: "light" },
+                        { hex: "#b71c1c", text: "light" },
+                        { hex: "#a01717", text: "light" },
+                        { hex: "#8a0f0f", text: "light" },
+                        { hex: "#750a0a", text: "light" },
+                        { hex: "#5f0000", text: "light" }
+                    ]
+                },
+                {
+                    name: "بني (Brown)",
+                    colorClass: "text-yellow-900", // Tailwind uses yellow scale for brown
+                    shades: [
+                        { hex: "#efebe9", text: "dark" },
+                        { hex: "#d7ccc8", text: "dark" },
+                        { hex: "#bcaaa4", text: "dark" },
+                        { hex: "#a1887f", text: "light" },
+                        { hex: "#8d6e63", text: "light" },
+                        { hex: "#795548", text: "light" },
+                        { hex: "#5d4037", text: "light" },
+                        { hex: "#3e2723", text: "light" }
+                    ]
+                },
+                {
+                    name: "شوكولاتة (Chocolate)",
+                    colorClass: "text-amber-900",
+                    shades: [
+                        { hex: "#f4ece7", text: "dark" },
+                        { hex: "#e8d8ce", text: "dark" },
+                        { hex: "#d3b9a7", text: "dark" },
+                        { hex: "#b9957a", text: "light" },
+                        { hex: "#a17252", text: "light" },
+                        { hex: "#8a5331", text: "light" },
+                        { hex: "#703b1a", text: "light" },
+                        { hex: "#5a2d10", text: "light" }
+                    ]
+                },
+                {
+                    name: "سكري (Cream)",
+                    colorClass: "text-yellow-900",
+                    shades: [
+                        { hex: "#fefcf5", text: "dark" },
+                        { hex: "#fbf8ef", text: "dark" },
+                        { hex: "#f5f0e1", text: "dark" },
+                        { hex: "#e9e2cb", text: "dark" },
+                        { hex: "#dcd1b5", text: "dark" },
+                        { hex: "#c2b59b", text: "dark" },
+                        { hex: "#a2947a", text: "light" },
+                        { hex: "#8a7d65", text: "light" }
+                    ]
+                },
+                /* تم نقل فضي (Silver) إلى الأعلى */
+                {
+                    name: "أسود (Black/Grayscale)",
+                    colorClass: "text-gray-900",
+                    shades: [
+                        { hex: "#f5f5f5", text: "dark" },
+                        { hex: "#e0e0e0", text: "dark" },
+                        { hex: "#bdbdbd", text: "dark" },
+                        { hex: "#9e9e9e", text: "dark" },
+                        { hex: "#757575", text: "light" },
+                        { hex: "#616161", text: "light" },
+                        { hex: "#424242", text: "light" },
+                        { hex: "#212121", text: "light" }
+                    ]
+                },
+                {
+                    name: "بيج (Beige)",
+                    colorClass: "text-stone-900",
+                    shades: [
+                        { hex: "#fafaf9", text: "dark" },
+                        { hex: "#f5f5f4", text: "dark" },
+                        { hex: "#e7e5e4", text: "dark" },
+                        { hex: "#d6d3d1", text: "dark" },
+                        { hex: "#a8a29e", text: "light" },
+                        { hex: "#78716c", text: "light" },
+                        { hex: "#44403c", text: "light" },
+                        { hex: "#292524", text: "light" }
+                    ]
+                },
+                /* تم نقل قسم "شوكولاتة (Chocolate)" من هنا إلى الأعلى */
+                /* تمت إعادة ترتيب جميع الألوان التالية
+                   حسب الترتيب الطيفي العالمي
+                */
+                {
+                    name: "أحمر (Red)",
+                    colorClass: "text-red-900",
+                    shades: [
+                        { hex: "#ffebee", text: "dark" },
+                        { hex: "#ffcdd2", text: "dark" },
+                        { hex: "#ef9a9a", text: "dark" },
+                        { hex: "#e57373", text: "light" },
+                        { hex: "#ef5350", text: "light" },
+                        { hex: "#f44336", text: "light" },
+                        { hex: "#d32f2f", text: "light" },
+                        { hex: "#b71c1c", text: "light" }
+                    ]
+                },
+                {
+                    name: "عنابي (Burgundy)",
+                    colorClass: "text-rose-900",
+                    shades: [
+                        { hex: "#fce4ec", text: "dark" },
+                        { hex: "#f8bbd0", text: "dark" },
+                        { hex: "#f48fb1", text: "dark" },
+                        { hex: "#f06292", text: "light" },
+                        { hex: "#ec407a", text: "light" },
+                        { hex: "#d81b60", text: "light" },
+                        { hex: "#ad1457", text: "light" },
+                        { hex: "#880e4f", text: "light" }
+                    ]
+                },
+                {
+                    name: "ياقوتي (Ruby)",
+                    colorClass: "text-red-700",
+                    shades: [
+                        { hex: "#fdeced", text: "dark" },
+                        { hex: "#fad7da", text: "dark" },
+                        { hex: "#f5b7bc", text: "dark" },
+                        { hex: "#f1979d", text: "dark" },
+                        { hex: "#e86c75", text: "light" },
+                        { hex: "#e1414f", text: "light" },
+                        { hex: "#c52230", text: "light" },
+                        { hex: "#a51a26", text: "light" }
+                    ]
+                },
+                {
+                    name: "مرجاني (Coral)",
+                    colorClass: "text-red-600",
+                    shades: [
+                        { hex: "#fff0f0", text: "dark" },
+                        { hex: "#ffdede", text: "dark" },
+                        { hex: "#ffc2c2", text: "dark" },
+                        { hex: "#ffa3a3", text: "dark" },
+                        { hex: "#ff8585", text: "dark" },
+                        { hex: "#ff6b6b", text: "dark" },
+                        { hex: "#e05252", text: "light" },
+                        { hex: "#c23b3b", text: "light" }
+                    ]
+                },
+                {
+                    name: "خوخي (Peach)",
+                    colorClass: "text-red-500",
+                    shades: [
+                        { hex: "#fff7f3", text: "dark" },
+                        { hex: "#ffede4", text: "dark" },
+                        { hex: "#ffdace", text: "dark" },
+                        { hex: "#ffc5b6", text: "dark" },
+                        { hex: "#ffae9b", text: "dark" },
+                        { hex: "#ff957e", text: "dark" },
+                        { hex: "#e07a61", text: "light" },
+                        { hex: "#c2634a", text: "light" }
+                    ]
+                },
+                {
+                    name: "برتقالي (Orange)",
+                    colorClass: "text-orange-900",
+                    shades: [
+                        { hex: "#fff7ed", text: "dark" },
+                        { hex: "#ffedd5", text: "dark" },
+                        { hex: "#fed7aa", text: "dark" },
+                        { hex: "#fdba74", text: "dark" },
+                        { hex: "#fb923c", text: "dark" },
+                        { hex: "#f97316", text: "light" },
+                        { hex: "#c2410c", text: "light" },
+                        { hex: "#7c2d12", text: "light" }
+                    ]
+                },
+                {
+                    name: "كهرماني (Amber)",
+                    colorClass: "text-amber-900",
+                    shades: [
+                        { hex: "#fffbeb", text: "dark" },
+                        { hex: "#fef3c7", text: "dark" },
+                        { hex: "#fde68a", text: "dark" },
+                        { hex: "#fcd34d", text: "dark" },
+                        { hex: "#fbbf24", text: "dark" },
+                        { hex: "#f59e0b", text: "dark" },
+                        { hex: "#d97706", text: "light" },
+                        { hex: "#b45309", text: "light" }
+                    ]
+                },
+                {
+                    name: "اصفر (Yellow)",
+                    colorClass: "text-yellow-900",
+                    shades: [
+                        { hex: "#fffde7", text: "dark" },
+                        { hex: "#fff9c4", text: "dark" },
+                        { hex: "#fff59d", text: "dark" },
+                        { hex: "#fff176", text: "dark" },
+                        { hex: "#ffee58", text: "dark" },
+                        { hex: "#ffeb3b", text: "dark" },
+                        { hex: "#fdd835", text: "dark" },
+                        { hex: "#fbc02d", text: "dark" }
+                    ]
+                },
+                {
+                    name: "ذهبي (Gold)",
+                    colorClass: "text-amber-900",
+                    shades: [
+                        { hex: "#fffbeb", text: "dark" },
+                        { hex: "#fef3c7", text: "dark" },
+                        { hex: "#fde68a", text: "dark" },
+                        { hex: "#fcd34d", text: "dark" },
+                        { hex: "#fbbf24", text: "dark" },
+                        { hex: "#f59e0b", text: "dark" },
+                        { hex: "#b45309", text: "light" },
+                        { hex: "#78350f", text: "light" }
+                    ]
+                },
+                {
+                    name: "خردلي (Mustard)",
+                    colorClass: "text-yellow-600",
+                    shades: [
+                        { hex: "#fefce8", text: "dark" },
+                        { hex: "#fef9c3", text: "dark" },
+                        { hex: "#fef08a", text: "dark" },
+                        { hex: "#fde047", text: "dark" },
+                        { hex: "#eab308", text: "dark" },
+                        { hex: "#ca8a04", text: "light" },
+                        { hex: "#a16207", text: "light" },
+                        { hex: "#854d0e", text: "light" }
+                    ]
+                },
+                {
+                    name: "ليموني (Lime)",
+                    colorClass: "text-lime-900",
+                    shades: [
+                        { hex: "#f7fee7", text: "dark" },
+                        { hex: "#eafbda", text: "dark" },
+                        { hex: "#d9f99d", text: "dark" },
+                        { hex: "#bef264", text: "dark" },
+                        { hex: "#a3e635", text: "dark" },
+                        { hex: "#84cc16", text: "dark" },
+                        { hex: "#65a30d", text: "light" },
+                        { hex: "#3f6212", text: "light" }
+                    ]
+                },
+                {
+                    name: "أخضر (Green)",
+                    colorClass: "text-green-900",
+                    shades: [
+                        { hex: "#f1f8e9", text: "dark" },
+                        { hex: "#dcedc8", text: "dark" },
+                        { hex: "#c5e1a5", text: "dark" },
+                        { hex: "#aed581", text: "dark" },
+                        { hex: "#9ccc65", text: "dark" },
+                        { hex: "#8bc34a", text: "dark" },
+                        { hex: "#689f38", text: "light" },
+                        { hex: "#33691e", text: "light" }
+                    ]
+                },
+                {
+                    name: "زيتي (Olive)",
+                    colorClass: "text-emerald-900",
+                    shades: [
+                        { hex: "#f4f6e8", text: "dark" },
+                        { hex: "#dce1b9", text: "dark" },
+                        { hex: "#c4cb8f", text: "dark" },
+                        { hex: "#aeb468", text: "dark" },
+                        { hex: "#989e47", text: "light" },
+                        { hex: "#808000", text: "light" },
+                        { hex: "#666600", text: "light" },
+                        { hex: "#4d4d00", text: "light" }
+                    ]
+                },
+                {
+                    name: "نعناعي (Mint)",
+                    colorClass: "text-emerald-700",
+                    shades: [
+                        { hex: "#f1fcf7", text: "dark" },
+                        { hex: "#dff9ed", text: "dark" },
+                        { hex: "#c3f4e1", text: "dark" },
+                        { hex: "#a1edd0", text: "dark" },
+                        { hex: "#7be5be", text: "dark" },
+                        { hex: "#50daab", text: "dark" },
+                        { hex: "#38b890", text: "light" },
+                        { hex: "#299a7a", text: "light" }
+                    ]
+                },
+                {
+                    name: "زمردي (Emerald)",
+                    colorClass: "text-emerald-600",
+                    shades: [
+                        { hex: "#ecfdf5", text: "dark" },
+                        { hex: "#d1fae5", text: "dark" },
+                        { hex: "#a7f3d0", text: "dark" },
+                        { hex: "#6ee7b7", text: "dark" },
+                        { hex: "#34d399", text: "dark" },
+                        { hex: "#10b981", text: "light" },
+                        { hex: "#059669", text: "light" },
+                        { hex: "#047857", text: "light" }
+                    ]
+                },
+                {
+                    name: "أزرق مخضر (Teal)",
+                    colorClass: "text-teal-900",
+                    shades: [
+                        { hex: "#f0fdfa", text: "dark" },
+                        { hex: "#ccfbf1", text: "dark" },
+                        { hex: "#99f6e4", text: "dark" },
+                        { hex: "#5eead4", text: "dark" },
+                        { hex: "#2dd4bf", text: "dark" },
+                        { hex: "#14b8a6", text: "light" },
+                        { hex: "#0f766e", text: "light" },
+                        { hex: "#134e4a", text: "light" }
+                    ]
+                },
+                {
+                    name: "فيروزي (Turquoise)",
+                    colorClass: "text-cyan-700",
+                    shades: [
+                        { hex: "#f0ffff", text: "dark" },
+                        { hex: "#d9ffff", text: "dark" },
+                        { hex: "#b8ffff", text: "dark" },
+                        { hex: "#90ffff", text: "dark" },
+                        { hex: "#60fcfc", text: "dark" },
+                        { hex: "#40e0d0", text: "dark" },
+                        { hex: "#30c7b5", text: "dark" },
+                        { hex: "#20a396", text: "light" }
+                    ]
+                },
+                {
+                    name: "سماوي (Cyan)",
+                    colorClass: "text-cyan-900",
+                    shades: [
+                        { hex: "#ecfeff", text: "dark" },
+                        { hex: "#cffafe", text: "dark" },
+                        { hex: "#a5f3fc", text: "dark" },
+                        { hex: "#67e8f9", text: "dark" },
+                        { hex: "#22d3ee", text: "dark" },
+                        { hex: "#06b6d4", text: "dark" },
+                        { hex: "#0e7490", text: "light" },
+                        { hex: "#164e63", text: "light" }
+                    ]
+                },
+                {
+                    name: "أزرق سماوي (Sky Blue)",
+                    colorClass: "text-sky-900",
+                    shades: [
+                        { hex: "#f0f9ff", text: "dark" },
+                        { hex: "#e0f2fe", text: "dark" },
+                        { hex: "#bae6fd", text: "dark" },
+                        { hex: "#7dd3fc", text: "dark" },
+                        { hex: "#38bdf8", text: "dark" },
+                        { hex: "#0ea5e9", text: "light" },
+                        { hex: "#0369a1", text: "light" },
+                        { hex: "#082f49", text: "light" }
+                    ]
+                },
+                {
+                    name: "أزرق ملكي (Royal Blue)",
+                    colorClass: "text-blue-700",
+                    shades: [
+                        { hex: "#ebf4ff", text: "dark" },
+                        { hex: "#d6eaff", text: "dark" },
+                        { hex: "#adcfff", text: "dark" },
+                        { hex: "#82b3ff", text: "dark" },
+                        { hex: "#5894ff", text: "light" },
+                        { hex: "#3678ff", text: "light" },
+                        { hex: "#2563eb", text: "light" },
+                        { hex: "#1d4ed8", text: "light" }
+                    ]
+                },
+                {
+                    name: "صفيري (Sapphire)",
+                    colorClass: "text-blue-600",
+                    shades: [
+                        { hex: "#eef3ff", text: "dark" },
+                        { hex: "#dbe7ff", text: "dark" },
+                        { hex: "#bacfff", text: "dark" },
+                        { hex: "#95b8ff", text: "dark" },
+                        { hex: "#6b9eff", text: "light" },
+                        { hex: "#4285f4", text: "light" },
+                        { hex: "#2a6dd9", text: "light" },
+                        { hex: "#1c56b0", text: "light" }
+                    ]
+                },
+                {
+                    name: "نيلي (Indigo)",
+                    colorClass: "text-indigo-900",
+                    shades: [
+                        { hex: "#eef2ff", text: "dark" },
+                        { hex: "#e0e7ff", text: "dark" },
+                        { hex: "#c7d2fe", text: "dark" },
+                        { hex: "#a5b4fc", text: "dark" },
+                        { hex: "#818cf8", text: "light" },
+                        { hex: "#6366f1", text: "light" },
+                        { hex: "#4338ca", text: "light" },
+                        { hex: "#312e81", text: "light" }
+                    ]
+                },
+                {
+                    name: "بنفسجي (Violet)",
+                    colorClass: "text-purple-900",
+                    shades: [
+                        { hex: "#ede7f6", text: "dark" },
+                        { hex: "#d1c4e9", text: "dark" },
+                        { hex: "#b39ddb", text: "dark" },
+                        { hex: "#9575cd", text: "light" },
+                        { hex: "#7e57c2", text: "light" },
+                        { hex: "#673ab7", text: "light" },
+                        { hex: "#512da8", text: "light" },
+                        { hex: "#311b92", text: "light" }
+                    ]
+                },
+                {
+                    name: "لافندر (Lavender)",
+                    colorClass: "text-indigo-900",
+                    shades: [
+                        { hex: "#f3e5f5", text: "dark" },
+                        { hex: "#e1bee7", text: "dark" },
+                        { hex: "#ce93d8", text: "dark" },
+                        { hex: "#ba68c8", text: "light" },
+                        { hex: "#ab47bc", text: "light" },
+                        { hex: "#9c27b0", text: "light" },
+                        { hex: "#7b1fa2", text: "light" },
+                        { hex: "#4a148c", text: "light" }
+                    ]
+                },
+                {
+                    name: "بنفسجي مخصص (#4b226c)",
+                    colorClass: "text-purple-900",
+                    shades: [
+                        { hex: "#f3e8f9", text: "dark" },
+                        { hex: "#e7d1f3", text: "dark" },
+                        { hex: "#dcbbed", text: "dark" },
+                        { hex: "#cfa4e7", text: "dark" },
+                        { hex: "#b17dd6", text: "light" },
+                        { hex: "#9456c4", text: "light" },
+                        { hex: "#7236a1", text: "light" },
+                        { hex: "#4b226c", text: "light" }
+                    ]
+                },
+                {
+                    name: "خزامي (Plum)",
+                    colorClass: "text-purple-800",
+                    shades: [
+                        { hex: "#f9f0ff", text: "dark" },
+                        { hex: "#f3e1ff", text: "dark" },
+                        { hex: "#e8d0ff", text: "dark" },
+                        { hex: "#d6b5ff", text: "dark" },
+                        { hex: "#c094ff", text: "dark" },
+                        { hex: "#a970ff", text: "light" },
+                        { hex: "#914dff", text: "light" },
+                        { hex: "#7c3aed", text: "light" }
+                    ]
+                },
+                {
+                    name: "جمشتي (Amethyst)",
+                    colorClass: "text-violet-600",
+                    shades: [
+                        { hex: "#f8f5ff", text: "dark" },
+                        { hex: "#f0eaff", text: "dark" },
+                        { hex: "#e3d5ff", text: "dark" },
+                        { hex: "#d0bfff", text: "dark" },
+                        { hex: "#b9a0ff", text: "light" },
+                        { hex: "#a280ff", text: "light" },
+                        { hex: "#8a5cff", text: "light" },
+                        { hex: "#763eff", text: "light" }
+                    ]
+                },
+                {
+                    name: "وردي (Pink)",
+                    colorClass: "text-pink-900",
+                    shades: [
+                        { hex: "#fdf2f8", text: "dark" },
+                        { hex: "#fce7f3", text: "dark" },
+                        { hex: "#fbcfe8", text: "dark" },
+                        { hex: "#f9a8d4", text: "dark" },
+                        { hex: "#f472b6", text: "light" },
+                        { hex: "#ec4899", text: "light" },
+                        { hex: "#be185d", text: "light" },
+                        { hex: "#831843", text: "light" }
+                    ]
+                },
+                {
+                    name: "أرجواني (Magenta/Fuchsia)",
+                    colorClass: "text-fuchsia-900",
+                    shades: [
+                        { hex: "#fdf4ff", text: "dark" },
+                        { hex: "#fae8ff", text: "dark" },
+                        { hex: "#f5d0fe", text: "dark" },
+                        { hex: "#f0abfc", text: "dark" },
+                        { hex: "#e879f9", text: "dark" },
+                        { hex: "#d946ef", text: "light" },
+                        { hex: "#a21caf", text: "light" },
+                        { hex: "#701a75", text: "light" }
+                    ]
+                },
+                /* تم نقل رمادي داكن (Slate) إلى الأعلى */
+                {
+                    name: "جرافيت (Graphite)",
+                    colorClass: "text-gray-700",
+                    shades: [
+                        { hex: "#f9fafb", text: "dark" },
+                        { hex: "#f3f4f6", text: "dark" },
+                        { hex: "#e5e7eb", text: "dark" },
+                        { hex: "#d1d5db", text: "dark" },
+                        { hex: "#9ca3af", text: "dark" },
+                        { hex: "#6b7280", text: "light" },
+                        { hex: "#4b5563", text: "light" },
+                        { hex: "#374151", text: "light" }
+                    ]
+                },
+                // --- 20 لوناً جديداً تمت إضافتها أدناه ---
+                {
+                    name: "بلاتيني (Platinum)",
+                    colorClass: "text-gray-400",
+                    shades: [
+                        { hex: "#f5f5f5", text: "dark" },
+                        { hex: "#eeeeee", text: "dark" },
+                        { hex: "#e0e0e0", text: "dark" },
+                        { hex: "#d6d6d6", text: "dark" },
+                        { hex: "#cccccc", text: "dark" },
+                        { hex: "#b0b0b0", text: "dark" },
+                        { hex: "#9e9e9e", text: "dark" },
+                        { hex: "#8a8a8a", text: "light" }
+                    ]
+                },
+                {
+                    name: "ذهبي وردي (Rose Gold)",
+                    colorClass: "text-rose-400",
+                    shades: [
+                        { hex: "#fff1f0", text: "dark" },
+                        { hex: "#ffe4e1", text: "dark" },
+                        { hex: "#ffd4cf", text: "dark" },
+                        { hex: "#ffc2ba", text: "dark" },
+                        { hex: "#ffb3a9", text: "dark" },
+                        { hex: "#ff9f92", text: "dark" },
+                        { hex: "#e08a7e", text: "light" },
+                        { hex: "#c2766c", text: "light" }
+                    ]
+                },
+                /* تم نقل أزرق داكن (Navy Blue) إلى الأعلى */
+                {
+                    name: "فحمي (Charcoal)",
+                    colorClass: "text-gray-800",
+                    shades: [
+                        { hex: "#eeeeee", text: "dark" },
+                        { hex: "#d0d0d0", text: "dark" },
+                        { hex: "#b3b3b3", text: "dark" },
+                        { hex: "#9b9b9b", text: "dark" },
+                        { hex: "#848484", text: "light" },
+                        { hex: "#6d6d6d", text: "light" },
+                        { hex: "#555555", text: "light" },
+                        { hex: "#3f3f3f", text: "light" }
+                    ]
+                },
+                {
+                    name: "قرمزي (Crimson)",
+                    colorClass: "text-red-800",
+                    shades: [
+                        { hex: "#fee7e7", text: "dark" },
+                        { hex: "#fccfcf", text: "dark" },
+                        { hex: "#f9b6b6", text: "dark" },
+                        { hex: "#f79e9e", text: "dark" },
+                        { hex: "#f48585", text: "dark" },
+                        { hex: "#dc2626", text: "light" },
+                        { hex: "#b91c1c", text: "light" },
+                        { hex: "#991b1b", text: "light" }
+                    ]
+                },
+                {
+                    name: "أخضر غابي (Forest Green)",
+                    colorClass: "text-green-800",
+                    shades: [
+                        { hex: "#f0fbf4", text: "dark" },
+                        { hex: "#def7e6", text: "dark" },
+                        { hex: "#c1efd1", text: "dark" },
+                        { hex: "#a1e7b9", text: "dark" },
+                        { hex: "#7ce09e", text: "dark" },
+                        { hex: "#52c47c", text: "light" },
+                        { hex: "#38a169", text: "light" },
+                        { hex: "#2f855a", text: "light" }
+                    ]
+                },
+                {
+                    name: "عناقية (Periwinkle)",
+                    colorClass: "text-violet-400",
+                    shades: [
+                        { hex: "#f5f3ff", text: "dark" },
+                        { hex: "#ede9fe", text: "dark" },
+                        { hex: "#ddd6fe", text: "dark" },
+                        { hex: "#c4b5fd", text: "dark" },
+                        { hex: "#a78bfa", text: "dark" },
+                        { hex: "#8b5cf6", text: "light" },
+                        { hex: "#7c3aed", text: "light" },
+                        { hex: "#6d28d9", text: "light" }
+                    ]
+                },
+                /* تم نقل بني رمادي (Taupe) إلى الأعلى */
+                {
+                    name: "سلموني (Salmon)",
+                    colorClass: "text-red-400",
+                    shades: [
+                        { hex: "#fff5f3", text: "dark" },
+                        { hex: "#ffe8e5", text: "dark" },
+                        { hex: "#ffd9d4", text: "dark" },
+                        { hex: "#ffc9c2", text: "dark" },
+                        { hex: "#ffb8b0", text: "dark" },
+                        { hex: "#fa8072", text: "dark" },
+                        { hex: "#e07064", text: "light" },
+                        { hex: "#c25f54", text: "light" }
+                    ]
+                },
+                {
+                    name: "برونزي (Bronze)",
+                    colorClass: "text-amber-700",
+                    shades: [
+                        { hex: "#f8f2e9", text: "dark" },
+                        { hex: "#f1e6d3", text: "dark" },
+                        { hex: "#e5d2b1", text: "dark" },
+                        { hex: "#dabe91", text: "dark" },
+                        { hex: "#cda870", text: "dark" },
+                        { hex: "#b58c52", text: "light" },
+                        { hex: "#a17941", text: "light" },
+                        { hex: "#8c6630", text: "light" }
+                    ]
+                },
+                {
+                    name: "ليلكي (Lilac)",
+                    colorClass: "text-purple-300",
+                    shades: [
+                        { hex: "#f9f7ff", text: "dark" },
+                        { hex: "#f3efff", text: "dark" },
+                        { hex: "#e9e0ff", text: "dark" },
+                        { hex: "#ddd1ff", text: "dark" },
+                        { hex: "#cebeff", text: "dark" },
+                        { hex: "#c0a9ff", text: "dark" },
+                        { hex: "#a98df0", text: "dark" },
+                        { hex: "#9174d9", text: "light" }
+                    ]
+                },
+                {
+                    name: "أخضر كريمي (Mint Cream)",
+                    colorClass: "text-green-200",
+                    shades: [
+                        { hex: "#fafffa", text: "dark" },
+                        { hex: "#f0fff5", text: "dark" },
+                        { hex: "#e6ffef", text: "dark" },
+                        { hex: "#d9ffe8", text: "dark" },
+                        { hex: "#c7ffde", text: "dark" },
+                        { hex: "#b0ffd1", text: "dark" },
+                        { hex: "#96f0c1", text: "dark" },
+                        { hex: "#7ddba3", text: "dark" }
+                    ]
+                },
+                {
+                    name: "عاجي (Ivory)",
+                    colorClass: "text-yellow-100",
+                    shades: [
+                        { hex: "#fffff7", text: "dark" },
+                        { hex: "#fefef0", text: "dark" },
+                        { hex: "#fefde9", text: "dark" },
+                        { hex: "#fdfce0", text: "dark" },
+                        { hex: "#fcfbd8", text: "dark" },
+                        { hex: "#fbfad0", text: "dark" },
+                        { hex: "#f5f2c2", text: "dark" },
+                        { hex: "#eae5ac", text: "dark" }
+                    ]
+                },
+                {
+                    name: "أزرق فولاذي (Steel Blue)",
+                    colorClass: "text-blue-600",
+                    shades: [
+                        { hex: "#f0f6fa", text: "dark" },
+                        { hex: "#e0ecf5", text: "dark" },
+                        { hex: "#cdddef", text: "dark" },
+                        { hex: "#b8d1e9", text: "dark" },
+                        { hex: "#a3c4e3", text: "dark" },
+                        { hex: "#8eb8dd", text: "dark" },
+                        { hex: "#75a6c9", text: "light" },
+                        { hex: "#5e94b5", text: "light" }
+                    ]
+                },
+                {
+                    name: "أوركيد (Orchid)",
+                    colorClass: "text-purple-500",
+                    shades: [
+                        { hex: "#fcf5ff", text: "dark" },
+                        { hex: "#f8ebff", text: "dark" },
+                        { hex: "#f3dfff", text: "dark" },
+                        { hex: "#edceff", text: "dark" },
+                        { hex: "#e5baff", text: "dark" },
+                        { hex: "#da99ff", text: "dark" },
+                        { hex: "#c774f0", text: "light" },
+                        { hex: "#b450d9", text: "light" }
+                    ]
+                },
+                {
+                    name: "أسمر (Tan)",
+                    colorClass: "text-yellow-700",
+                    shades: [
+                        { hex: "#fdfaf6", text: "dark" },
+                        { hex: "#fbf5ed", text: "dark" },
+                        { hex: "#f7eede", text: "dark" },
+                        { hex: "#f2e5cb", text: "dark" },
+                        { hex: "#e9d9b4", text: "dark" },
+                        { hex: "#d2b48c", text: "dark" },
+                        { hex: "#bf9f73", text: "light" },
+                        { hex: "#ab8a5e", text: "light" }
+                    ]
+                },
+                {
+                    name: "أكوا (Aqua)",
+                    colorClass: "text-cyan-400",
+                    shades: [
+                        { hex: "#f0ffff", text: "dark" },
+                        { hex: "#e0ffff", text: "dark" },
+                        { hex: "#cffff", text: "dark" },
+                        { hex: "#b8ffff", text: "dark" },
+                        { hex: "#9effff", text: "dark" },
+                        { hex: "#7fffd4", text: "dark" },
+                        { hex: "#68e8c0", text: "dark" },
+                        { hex: "#50cfaa", text: "dark" }
+                    ]
+                },
+                {
+                    name: "وردي فاقع (Hot Pink)",
+                    colorClass: "text-pink-500",
+                    shades: [
+                        { hex: "#fff0f7", text: "dark" },
+                        { hex: "#ffe0f0", text: "dark" },
+                        { hex: "#ffcce8", text: "dark" },
+                        { hex: "#ffb3de", text: "dark" },
+                        { hex: "#ff99d4", text: "dark" },
+                        { hex: "#ff69b4", text: "light" },
+                        { hex: "#e05a9c", text: "light" },
+                        { hex: "#c24b84", text: "light" }
+                    ]
+                },
+                {
+                    name: "زيتي باهت (Olive Drab)",
+                    colorClass: "text-lime-800",
+                    shades: [
+                        { hex: "#f9f9f0", text: "dark" },
+                        { hex: "#f3f3e0", text: "dark" },
+                        { hex: "#e8e8cd", text: "dark" },
+                        { hex: "#dedeaf", text: "dark" },
+                        { hex: "#d4d490", text: "dark" },
+                        { hex: "#bab86c", text: "dark" },
+                        { hex: "#a19e5c", text: "light" },
+                        { hex: "#88864b", text: "light" }
+                    ]
+                },
+                {
+                    name: "سيينا (Sienna)",
+                    colorClass: "text-orange-900",
+                    shades: [
+                        { hex: "#fdf6f2", text: "dark" },
+                        { hex: "#faedE5", text: "dark" },
+                        { hex: "#f5dccb", text: "dark" },
+                        { hex: "#f0caad", text: "dark" },
+                        { hex: "#eba789", text: "dark" },
+                        { hex: "#e0825e", text: "light" },
+                        { hex: "#c26a45", text: "light" },
+                        { hex: "#a65634", text: "light" }
+                    ]
+                },
+                {
+                    name: "أزرق ليلي (Midnight Blue)",
+                    colorClass: "text-blue-900",
+                    shades: [
+                        { hex: "#ecf0f1", text: "dark" },
+                        { hex: "#bdc3c7", text: "dark" },
+                        { hex: "#95a5a6", text: "dark" },
+                        { hex: "#7f8c8d", text: "light" },
+                        { hex: "#34495e", text: "light" },
+                        { hex: "#2c3e50", text: "light" },
+                        { hex: "#233140", text: "light" },
+                        { hex: "#1a2531", text: "light" }
+                    ]
+                },
+                {
+                    name: "أزرق بحري (Marine Blue)",
+                    colorClass: "text-cyan-800",
+                    shades: [
+                        { hex: "#e0f7fa", text: "dark" },
+                        { hex: "#b2ebf2", text: "dark" },
+                        { hex: "#80deea", text: "dark" },
+                        { hex: "#4dd0e1", text: "dark" },
+                        { hex: "#26c6da", text: "light" },
+                        { hex: "#00acc1", text: "light" },
+                        { hex: "#00838f", text: "light" },
+                        { hex: "#006064", text: "light" }
+                    ]
+                },
+                {
+                    name: "أزرق بترولي (Petrol Blue)",
+                    colorClass: "text-cyan-900",
+                    shades: [
+                        { hex: "#cffafe", text: "dark" },
+                        { hex: "#a5f3fc", text: "dark" },
+                        { hex: "#67e8f9", text: "dark" },
+                        { hex: "#22d3ee", text: "dark" },
+                        { hex: "#06b6d4", text: "light" },
+                        { hex: "#0e7490", text: "light" },
+                        { hex: "#164e63", text: "light" },
+                        { hex: "#083344", text: "light" }
+                    ]
+                }
+            ];
+        </script>
+
+        <!-- حاوية عرض الألوان -->
+        <div id="palette-container" class="space-y-12">
+            <!-- سيتم ملء هذا القسم بواسطة جافاسكريبت -->
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("palette-container");
+            const roles = window.roles;
+            const palettes = window.palettes;
+
+            palettes.forEach(palette => {
+                // إنشاء قسم لكل لون
+                const section = document.createElement("section");
+                section.className = "bg-white rounded-xl shadow-lg p-6 overflow-hidden";
+                
+                // إضافة عنوان للقسم
+                const title = document.createElement("h2");
+                title.className = `text-3xl font-bold mb-6 ${palette.colorClass}`;
+                title.textContent = palette.name;
+                section.appendChild(title);
+
+                // إنشاء شبكة لعرض الألوان
+                const grid = document.createElement("div");
+                grid.className = "grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4";
+                
+                // إضافة كل تدرج لوني
+                palette.shades.forEach((shade, index) => {
+                    const role = roles[index] || `Shade ${index + 1}`;
+                    
+                    const card = document.createElement("div");
+                    card.className = `rounded-lg shadow-md h-52 flex flex-col justify-between p-4 transition-transform duration-200 hover:scale-105 ${shade.text === 'light' ? 'text-white' : 'text-gray-900'}`;
+                    card.style.backgroundColor = shade.hex;
+
+                    // إضافة اسم الرتبة (من اليسار لليمين)
+                    const roleName = document.createElement("div");
+                    roleName.className = "font-bold text-lg";
+                    roleName.textContent = role;
+                    roleName.dir = "ltr"; // لضمان عرض الأسماء الإنجليزية بشكل صحيح
+                    
+                    // إضافة كود اللون
+                    const hexCode = document.createElement("div");
+                    hexCode.className = "font-mono text-sm opacity-90";
+                    hexCode.textContent = shade.hex;
+                    hexCode.dir = "ltr";
+
+                    card.appendChild(roleName);
+                    card.appendChild(hexCode);
+                    grid.appendChild(card);
+                });
+
+                section.appendChild(grid);
+                container.appendChild(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
